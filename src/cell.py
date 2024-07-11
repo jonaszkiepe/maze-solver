@@ -6,14 +6,15 @@ class Cell():
         self.has_left_wall, self.has_right_wall = True, True
         self.has_top_wall, self.has_bottom_wall = True, True
         self._x1, self._x2, self._y1, self._y2 = None, None, None, None
-        self._win, self._visited = window, False
+        self._win = window
+        self._visited = False
 
     def draw(self, x1, y1, x2, y2):
         if not self._win: return
         color = lambda x: "black" if x else "white"
         self._x1, self._x2, self._y1, self._y2 = x1, x2, y1, y2
-        top_left, top_right = Point(self._x1, self._y1), Point(self._x2, self._y1)
-        bottom_left, bottom_right = Point(self._x1, self._y2), Point(self._x2, self._y2)
+        top_left, top_right = Point(x1, y1), Point(x2, y1)
+        bottom_left, bottom_right = Point(x1, y2), Point(x2, y2)
         self._win.draw_line(Line(top_left, top_right), color(self.has_top_wall))
         self._win.draw_line(Line(bottom_left, bottom_right), color(self.has_bottom_wall))
         self._win.draw_line(Line(top_right, bottom_right), color(self.has_right_wall))

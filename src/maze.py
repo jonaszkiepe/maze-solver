@@ -52,10 +52,13 @@ class Maze():
             if i < self._num_cols - 1: adjacent.append((i + 1, j))
             if j > 0: adjacent.append((i, j - 1))
             if j < self._num_rows - 1: adjacent.append((i, j + 1))
+
             not_visited = [ij for ij in adjacent if not self._cells[ij[0]][ij[1]]._visited]
             if not not_visited: self._draw_cell(i, j); return
+
             ij = random.choice(not_visited)
             current_cell, adjacent_cell = self._cells[i][j], self._cells[ij[0]][ij[1]]
+
             if ij[0] < i:
                 adjacent_cell.has_right_wall = False
                 current_cell.has_left_wall = False
@@ -68,6 +71,7 @@ class Maze():
             else:
                 adjacent_cell.has_top_wall = False
                 current_cell.has_bottom_wall = False
+
             self._break_walls_r(ij[0], ij[1])
 
     def _reset_cells_visited(self):
@@ -86,6 +90,7 @@ class Maze():
         if not cell.has_bottom_wall: next.append((i, j + 1))
         if not cell.has_right_wall: next.append((i + 1, j))
         if not cell.has_top_wall and not (i == 0 and j == 0): next.append((i, j - 1))
+
         not_visited = [ij for ij in next if not self._cells[ij[0]][ij[1]]._visited]
         if not not_visited: return False
         for ij in not_visited: 
