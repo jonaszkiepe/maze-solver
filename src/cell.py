@@ -22,8 +22,8 @@ class Cell():
 
     def draw_move(self, to_cell, undo=False):
         if not self._win: return
-        if undo: color = "red"
-        else: color = "gray"
+        if undo: color = "gray"
+        else: color = "red"
         _from = Point((self._x1 + self._x2) / 2, (self._y1 + self._y2) / 2)
         to = Point((to_cell._x1 + to_cell._x2) / 2, (to_cell._y1 + to_cell._y2) / 2)
         self._win.draw_line(Line(_from, to), color)
